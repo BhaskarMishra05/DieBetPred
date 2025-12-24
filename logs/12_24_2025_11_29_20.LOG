@@ -1,0 +1,5 @@
+[2025-12-24 11:29:20,484] 97 -WARNING - * Debugger is active!
+[2025-12-24 11:29:20,485] 97 -INFO - * Debugger PIN: 120-045-879
+[2025-12-24 11:29:28,474] 97 -INFO -127.0.0.1 - - [24/Dec/2025 11:29:28] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+[2025-12-24 11:29:31,248] 97 -INFO -127.0.0.1 - - [24/Dec/2025 11:29:31] "[33mGET /predictions HTTP/1.1[0m" 404 -
+[2025-12-24 11:32:14,267] 97 -INFO - * Detected change in '/home/bhaskar/Here_we_go_again/VS_code_ting/DieBET/app.py', reloading

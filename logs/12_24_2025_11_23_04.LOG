@@ -1,0 +1,18 @@
+[2025-12-24 11:23:04,423] 97 -WARNING - * Debugger is active!
+[2025-12-24 11:23:04,424] 97 -INFO - * Debugger PIN: 120-045-879
+[2025-12-24 11:23:22,393] 97 -INFO -127.0.0.1 - - [24/Dec/2025 11:23:22] "[35m[1mGET /predictions HTTP/1.1[0m" 500 -
+[2025-12-24 11:23:22,492] 97 -INFO -127.0.0.1 - - [24/Dec/2025 11:23:22] "GET /predictions?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+[2025-12-24 11:23:22,493] 97 -INFO -127.0.0.1 - - [24/Dec/2025 11:23:22] "GET /predictions?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+[2025-12-24 11:23:22,520] 97 -INFO -127.0.0.1 - - [24/Dec/2025 11:23:22] "GET /predictions?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+[2025-12-24 11:23:22,528] 97 -INFO -127.0.0.1 - - [24/Dec/2025 11:23:22] "GET /predictions?__debugger__=yes&cmd=resource&f=console.png&s=2WYxUf9ip49QYV7vCch1 HTTP/1.1" 200 -
+[2025-12-24 11:23:26,718] 97 -INFO -127.0.0.1 - - [24/Dec/2025 11:23:26] "GET / HTTP/1.1" 200 -
+[2025-12-24 11:23:27,480] 97 -INFO -127.0.0.1 - - [24/Dec/2025 11:23:27] "GET / HTTP/1.1" 200 -
+[2025-12-24 11:23:27,625] 97 -INFO -127.0.0.1 - - [24/Dec/2025 11:23:27] "GET / HTTP/1.1" 200 -
+[2025-12-24 11:23:27,779] 97 -INFO -127.0.0.1 - - [24/Dec/2025 11:23:27] "GET / HTTP/1.1" 200 -
+[2025-12-24 11:23:27,973] 97 -INFO -127.0.0.1 - - [24/Dec/2025 11:23:27] "GET / HTTP/1.1" 200 -
+[2025-12-24 11:23:28,154] 97 -INFO -127.0.0.1 - - [24/Dec/2025 11:23:28] "GET / HTTP/1.1" 200 -
+[2025-12-24 11:23:29,499] 97 -INFO -127.0.0.1 - - [24/Dec/2025 11:23:29] "[35m[1mGET /predictions HTTP/1.1[0m" 500 -
+[2025-12-24 11:23:29,626] 97 -INFO -127.0.0.1 - - [24/Dec/2025 11:23:29] "[36mGET /predictions?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+[2025-12-24 11:23:29,628] 97 -INFO -127.0.0.1 - - [24/Dec/2025 11:23:29] "[36mGET /predictions?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+[2025-12-24 11:23:29,659] 97 -INFO -127.0.0.1 - - [24/Dec/2025 11:23:29] "[36mGET /predictions?__debugger__=yes&cmd=resource&f=console.png&s=2WYxUf9ip49QYV7vCch1 HTTP/1.1[0m" 304 -
+[2025-12-24 11:25:53,262] 97 -INFO - * Detected change in '/home/bhaskar/Here_we_go_again/VS_code_ting/DieBET/app.py', reloading

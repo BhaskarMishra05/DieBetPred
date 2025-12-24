@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Diabetes Risk Prediction</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #eef2f3, #8e9eab);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            width: 100%;
+            max-width: 500px;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0px 10px 30px rgba(0,0,0,0.15);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #1b263b;
+            font-size: 1.9rem;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        .field-group {
+            margin-bottom: 18px;
+        }
+        .field-range {
+            font-size: 0.85rem;
+            color: #586e75;
+            margin-bottom: 4px;
+        }
+        label {
+            font-size: 1rem;
+            color: #2f3e46;
+            font-weight: 600;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 10px 12px;
+            margin-top: 4px;
+            border-radius: 6px;
+            border: 1px solid #adb5bd;
+            font-size: 1rem;
+        }
+        input[type="number"]:focus {
+            outline: none;
+            border-color: #0077b6;
+            box-shadow: 0 0 5px rgba(0,119,182,0.3);
+        }
+        button {
+            background: #0077b6;
+            color: white;
+            padding: 12px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #0096c7;
+        }
+        .result {
+            margin-top: 22px;
+            text-align: center;
+            padding: 14px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 6px;
+        }
+        .result.yes {
+            background: #fdecea;
+            color: #c62828;
+        }
+        .result.no {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+        .back-link {
+            text-align: center;
+            margin-top: 16px;
+        }
+        .back-link a {
+            color: #0077b6;
+            text-decoration: none;
+            font-size: 0.95rem;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Diabetes Risk Prediction</h1>
+        <form method="POST" action="/predictions">
+            
+            <div class="field-group">
+                <div class="field-range">Enter 0 or 1 (0 = No, 1 = Yes)</div>
+                <label>Family History of Diabetes</label>
+                <input type="number" name="family_history_diabetes" min="0" max="1" required>
+            </div>
+
+            <div class="field-group">
+                <div class="field-range">Typical range: 0–600 minutes/week</div>
+                <label>Physical Activity (minutes/week)</label>
+                <input type="number" step="any" name="physical_activity_minutes_per_week" min="0" max="1000" required>
+            </div>
+
+            <div class="field-group">
+                <div class="field-range">Typical adult age: 18–100 years</div>
+                <label>Age (years)</label>
+                <input type="number" name="age" min="18" max="120" required>
+            </div>
+
+            <div class="field-group">
+                <div class="field-range">BMI healthy: 18.5–24.9 kg/m²; obese ≥30</div>
+                <label>BMI (kg/m²)</label>
+                <input type="number" step="any" name="bmi" min="10" max="60" required>
+            </div>
+
+            <div class="field-group">
+                <div class="field-range">Triglycerides ≥150 mg/dL is elevated</div>
+                <label>Triglycerides (mg/dL)</label>
+                <input type="number" step="any" name="triglycerides" min="50" max="1000" required>
+            </div>
+
+            <div class="field-group">
+                <div class="field-range">LDL optimal: <100 mg/dL</div>
+                <label>LDL Cholesterol (mg/dL)</label>
+                <input type="number" step="any" name="ldl_cholesterol" min="50" max="300" required>
+            </div>
+
+            <div class="field-group">
+                <div class="field-range">Normal SBP: 90–120 mmHg</div>
+                <label>Systolic Blood Pressure (mmHg)</label>
+                <input type="number" step="any" name="systolic_bp" min="80" max="220" required>
+            </div>
+
+            <div class="field-group">
+                <div class="field-range">Diet score range (example): 0–10</div>
+                <label>Diet Score</label>
+                <input type="number" step="any" name="diet_score" min="0" max="20" required>
+            </div>
+
+            <div class="field-group">
+                <div class="field-range">Waist-to-hip ratio often ~0.7–1.2</div>
+                <label>Waist to Hip Ratio</label>
+                <input type="number" step="any" name="waist_to_hip_ratio" min="0.5" max="1.5" required>
+            </div>
+
+            <div class="field-group">
+                <div class="field-range">HDL cholesterol (good lipid): 30–100 mg/dL</div>
+                <label>HDL Cholesterol (mg/dL)</label>
+                <input type="number" step="any" name="hdl_cholesterol" min="20" max="120" required>
+            </div>
+
+            <button type="submit">Predict Risk</button>
+        </form>
+
+        <!-- Result display section -->
+        {% if final_result %}
+        <div class="result {% if final_result == 'YES' %}yes{% else %}no{% endif %}">
+            Predicted Diabetes Risk: {{ final_result }}
+        </div>
+        {% endif %}
+
+        <div class="back-link">
+            <a href="/">← Back to Home</a>
+        </div>
+    </div>
+</body>
+</html>

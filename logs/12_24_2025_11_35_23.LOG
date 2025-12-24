@@ -1,0 +1,12 @@
+[2025-12-24 11:35:23,462] 97 -WARNING - * Debugger is active!
+[2025-12-24 11:35:23,462] 97 -INFO - * Debugger PIN: 120-045-879
+[2025-12-24 11:35:27,962] 97 -INFO -127.0.0.1 - - [24/Dec/2025 11:35:27] "[35m[1mPOST /predictions HTTP/1.1[0m" 500 -
+[2025-12-24 11:35:28,087] 97 -INFO -127.0.0.1 - - [24/Dec/2025 11:35:28] "[36mGET /predictions?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+[2025-12-24 11:35:28,090] 97 -INFO -127.0.0.1 - - [24/Dec/2025 11:35:28] "[36mGET /predictions?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+[2025-12-24 11:35:28,191] 97 -INFO -127.0.0.1 - - [24/Dec/2025 11:35:28] "GET /predictions?__debugger__=yes&cmd=resource&f=console.png&s=P8GODGgXdwspiu91WzPE HTTP/1.1" 200 -
+[2025-12-24 11:35:30,597] 97 -INFO -127.0.0.1 - - [24/Dec/2025 11:35:30] "GET /predictions HTTP/1.1" 200 -
+[2025-12-24 11:35:31,886] 97 -INFO -127.0.0.1 - - [24/Dec/2025 11:35:31] "[35m[1mPOST /predictions HTTP/1.1[0m" 500 -
+[2025-12-24 11:35:31,961] 97 -INFO -127.0.0.1 - - [24/Dec/2025 11:35:31] "[36mGET /predictions?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+[2025-12-24 11:35:31,963] 97 -INFO -127.0.0.1 - - [24/Dec/2025 11:35:31] "[36mGET /predictions?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+[2025-12-24 11:35:31,998] 97 -INFO -127.0.0.1 - - [24/Dec/2025 11:35:31] "[36mGET /predictions?__debugger__=yes&cmd=resource&f=console.png&s=P8GODGgXdwspiu91WzPE HTTP/1.1[0m" 304 -
+[2025-12-24 11:36:11,891] 97 -INFO - * Detected change in '/home/bhaskar/Here_we_go_again/VS_code_ting/DieBET/src/pipeline/prediction_pipeline.py', reloading

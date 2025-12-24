@@ -8,30 +8,37 @@ from src.utils import load_object, save_object
 from pandas import DataFrame
 import joblib
 import pickle
+
 class PredictionPipeline():
     def __init__(self):
-        self.model_path_configure = 'artifacts/ensemble_config.pkl'
+        self.model_path_configure = 'artifacts/lgbm_model.pkl'
         self.preprocessing_file_path = 'artifacts/preprocessing.pkl'
+    
+    def predict(self, feature: DataFrame): 
+        try:
+            feature = feature.copy()
+            preprocessor_loaded_object = load_object(self.preprocessing_file_path)
+            model_config = load_object(self.model_path_configure)
+            
+            data_transformed = preprocessor_loaded_object.transform(feature)
 
-    def predict(self , feature: DataFrame): 
-        feature = feature.copy()
-        preprocessor_loaded_object = load_object(self.preprocessing_file_path)
-        model_config = load_object(self.model_path_configure)
-
-        data_transformed = preprocessor_loaded_object.transform(feature)
-        pred = model_config.predict(data_transformed)
-        return pred
+            pred = model_config.predict(data_transformed)
+            
+            return pred
+        except Exception as e:
+            raise CustomException(e, sys)
 
 class Prediction_Pipeline_Interacting_Class():
-    def __init__(self,family_history_diabetes,
-                physical_activity_minutes_per_week,
-                age,
-                bmi,
-                triglycerides,
-                ldl_cholesterol,
-                systolic_bp,
-                diet_score,
-                waist_to_hip_ratio,hdl_cholesterol):
+    def __init__(self, family_history_diabetes,
+                 physical_activity_minutes_per_week,
+                 age,
+                 bmi,
+                 triglycerides,
+                 ldl_cholesterol,
+                 systolic_bp,
+                 diet_score,
+                 waist_to_hip_ratio,
+                 hdl_cholesterol):
         self.family_history_diabetes = family_history_diabetes
         self.physical_activity_minutes_per_week = physical_activity_minutes_per_week
         self.age = age
@@ -42,19 +49,21 @@ class Prediction_Pipeline_Interacting_Class():
         self.diet_score = diet_score
         self.waist_to_hip_ratio = waist_to_hip_ratio
         self.hdl_cholesterol = hdl_cholesterol
-
-    def to_dataframe(self) -> DataFrame:
-        data = {
-                'family_history_diabetes': self.family_history_diabetes,
-                'physical_activity_minutes_per_week' : self.physical_activity_minutes_per_week,
-                'age' : self.age,
-                'bmi' : self.bmi,
-                'triglycerides' : self.triglycerides,
-                'ldl_cholesterol' : self.ldl_cholesterol,
-                'systolic_bp' : self.systolic_bp,
-                'diet_score' : self.diet_score,
-                'waist_to_hip_ratio' : self.waist_to_hip_ratio,
-                'hdl_cholesterol' : self.hdl_cholesterol
-        }
-        return pd.DataFrame([data])
     
+    def to_dataframe(self) -> DataFrame:
+        try:
+            data = {
+                'family_history_diabetes': [self.family_history_diabetes],
+                'physical_activity_minutes_per_week': [self.physical_activity_minutes_per_week],
+                'age': [self.age],
+                'bmi': [self.bmi],
+                'triglycerides': [self.triglycerides],
+                'ldl_cholesterol': [self.ldl_cholesterol],
+                'systolic_bp': [self.systolic_bp],
+                'diet_score': [self.diet_score],
+                'waist_to_hip_ratio': [self.waist_to_hip_ratio],
+                'hdl_cholesterol': [self.hdl_cholesterol]
+            }
+            return pd.DataFrame(data)
+        except Exception as e:
+            raise CustomException(e, sys)
