@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Predictor | Bhaskar Mishra</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background: #0a0a0a;
+      color: #fff;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    .grain {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.03;
+      pointer-events: none;
+      z-index: 100;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' /%3E%3C/svg%3E");
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 2rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 50;
+      background: rgba(10, 10, 10, 0.8);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .back-link {
+      color: #666;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .back-link:hover {
+      color: #fff;
+    }
+
+    .logo {
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 8rem 4rem 4rem;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1.2rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      margin-bottom: 2rem;
+      text-transform: uppercase;
+      color: #999;
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
+      background: linear-gradient(180deg, #fff 0%, #666 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      font-size: 1rem;
+      color: #666;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1fr 400px;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .form-section {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 24px;
+      padding: 3rem;
+    }
+
+    .section-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 2rem;
+      color: #e2e8f0;
+      letter-spacing: -0.02em;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: #999;
+      font-size: 0.85rem;
+      letter-spacing: 0.02em;
+    }
+
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 0.9rem 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.03);
+      color: #fff;
+      font-size: 0.95rem;
+      font-family: 'Space Grotesk', sans-serif;
+      transition: all 0.3s ease;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+      outline: none;
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .form-group input::placeholder {
+      color: #444;
+    }
+
+    .form-group select option {
+      background: #1a1a1a;
+      color: #fff;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 8rem;
+    }
+
+    .predict-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 24px;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .quick-fill {
+      width: 100%;
+      padding: 0.9rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 50px;
+      color: #999;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .quick-fill:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+    }
+
+    .predict-btn {
+      width: 100%;
+      padding: 1.2rem;
+      font-size: 1rem;
+      font-weight: 600;
+      background: #fff;
+      border: none;
+      border-radius: 50px;
+      color: #0a0a0a;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Space Grotesk', sans-serif;
+      letter-spacing: -0.01em;
+      box-shadow: 0 4px 20px rgba(255, 255, 255, 0.2);
+    }
+
+    .predict-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(255, 255, 255, 0.3);
+    }
+
+    .predict-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .loading {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      color: #666;
+      margin: 1.5rem 0;
+      font-size: 0.9rem;
+    }
+
+    .spinner {
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      border-top: 2px solid #fff;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .result {
+      margin-top: 2rem;
+      padding: 2rem;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: none;
+      animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .result.success {
+      background: rgba(16, 185, 129, 0.05);
+      border-color: rgba(16, 185, 129, 0.2);
+    }
+
+    .result.failure {
+      background: rgba(239, 68, 68, 0.05);
+      border-color: rgba(239, 68, 68, 0.2);
+    }
+
+    .result-text {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      letter-spacing: -0.02em;
+    }
+
+    .result-details {
+      font-size: 0.85rem;
+      color: #666;
+      margin-top: 0.75rem;
+    }
+
+    footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 1.5rem 4rem;
+      background: rgba(10, 10, 10, 0.8);
+      backdrop-filter: blur(20px);
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      z-index: 50;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #666;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="grain"></div>
+
+  <nav>
+    <div class="logo">BM</div>
+    <a href="/" class="back-link">
+      <i class="fas fa-arrow-left"></i>
+      Back
+    </a>
+  </nav>
+
+  <div class="container">
+    <div class="header">
+      <div class="badge">
+        <i class="fas fa-sparkles"></i>
+        <span>Prediction System</span>
+      </div>
+      <h1>Customer Analysis</h1>
+      <p class="subtitle">Enter customer information to predict subscription likelihood</p>
+    </div>
+
+    <div class="main-grid">
+      <div class="form-section">
+        <h2 class="section-title">Customer Information</h2>
+        <form id="predictionForm">
+          <div class="form-grid">
+            <!-- form inputs unchanged -->
+          </div>
+        </form>
+      </div>
+
+      <div class="sidebar">
+        <div class="predict-card">
+          <button type="button" class="quick-fill" onclick="fillSampleData()">Fill Sample Data</button>
+          <button type="submit" class="predict-btn" form="predictionForm">Analyze Customer</button>
+          <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <span>Processing...</span>
+          </div>
+          <div class="result" id="result">
+            <div class="result-text" id="resultText"></div>
+            <div class="result-details" id="resultDetails"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer><strong>Bhaskar Mishra</strong></footer>
+
+  <script>
+    (function () {
+      const BACKEND_URL = '/predict';
+      const form = document.getElementById('predictionForm');
+      const btn = document.querySelector('.predict-btn');
+      const loading = document.getElementById('loading');
+      const result = document.getElementById('result');
+      const resultText = document.getElementById('resultText');
+      const resultDetails = document.getElementById('resultDetails');
+
+      async function submitHandler(e) {
+        e.preventDefault();
+        btn.disabled = true;
+        loading.style.display = 'flex';
+        result.style.display = 'none';
+
+        const payload = {};
+        new FormData(form).forEach((value, key) => {
+          payload[key] = isNaN(value) ? value : Number(value);
+        });
+
+        try {
+          const res = await fetch(BACKEND_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+
+          const data = await res.json();
+          loading.style.display = 'none';
+          btn.disabled = false;
+          result.style.display = 'block';
+
+          if (data.prediction === 1 || data.prediction === 'yes') {
+            result.className = 'result success';
+            resultText.innerHTML = 'Likely to Subscribe';
+          } else {
+            result.className = 'result failure';
+            resultText.innerHTML = 'Unlikely to Subscribe';
+          }
+        } catch (err) {
+          loading.style.display = 'none';
+          btn.disabled = false;
+          result.style.display = 'block';
+          result.className = 'result failure';
+          resultText.innerHTML = 'Error';
+          resultDetails.textContent = err.message;
+        }
+      }
+
+      form.addEventListener('submit', submitHandler);
+    })();
+  </script>
+</body>
+</html>
