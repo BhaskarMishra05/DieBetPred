@@ -56,7 +56,15 @@ class MODEL_TRAINER:
             y_pred_xgb = model_xgb.predict_proba(X_test)[:, 1]
             y_pred_lgbm = model_lgbm.predict_proba(X_test)[:, 1]
             y_pred_lr = model_lr.predict_proba(X_test)[:, 1]
+            
+            y_pred_xgb_bin = (y_pred_xgb >= 0.5).astype(int)
+            y_pred_lgbm_bin = (y_pred_lgbm >= 0.5).astype(int)
+            y_pred_lr_bin = (y_pred_lr >= 0.5).astype(int)
+            logging.info(f'XGB MODEL RECALL: - {recall_score(y_test, y_pred_xgb_bin)}')
+            logging.info(f'LGBM MODEL RECALL: - {recall_score(y_test, y_pred_lgbm_bin)}')
+            logging.info(f'LR MODEL RECALL: - {recall_score(y_test, y_pred_lr_bin)}')
 
+            
             logging.info("SAVING TRAINED MODELS")
 
             save_object(self.model_trainer_config_object.lr_model_path, model_lr)

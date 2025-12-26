@@ -1,0 +1,14 @@
+[2025-12-26 17:25:46,329] 97 -INFO -[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.154.171.222:5000
+[2025-12-26 17:25:46,329] 97 -INFO -[33mPress CTRL+C to quit[0m
+[2025-12-26 17:25:46,330] 97 -INFO - * Restarting with stat
+[2025-12-26 17:25:46,922] 97 -WARNING - * Debugger is active!
+[2025-12-26 17:25:46,922] 97 -INFO - * Debugger PIN: 450-101-363
+[2025-12-26 17:25:50,257] 97 -INFO -127.0.0.1 - - [26/Dec/2025 17:25:50] "GET / HTTP/1.1" 200 -
+[2025-12-26 17:25:50,887] 97 -INFO -127.0.0.1 - - [26/Dec/2025 17:25:50] "GET / HTTP/1.1" 200 -
+[2025-12-26 17:25:51,084] 97 -INFO -127.0.0.1 - - [26/Dec/2025 17:25:51] "GET / HTTP/1.1" 200 -
+[2025-12-26 17:25:52,615] 97 -INFO -127.0.0.1 - - [26/Dec/2025 17:25:52] "GET /predictions HTTP/1.1" 200 -
+[2025-12-26 17:30:56,490] 97 -INFO -127.0.0.1 - - [26/Dec/2025 17:30:56] "GET /predictions HTTP/1.1" 200 -
+[2025-12-26 17:31:37,434] 97 -INFO -127.0.0.1 - - [26/Dec/2025 17:31:37] "POST /predictions HTTP/1.1" 200 -
